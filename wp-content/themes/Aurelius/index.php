@@ -1,82 +1,72 @@
-<?php get_header();?>
-	<!-- Column 1 /Content -->
-	<div class="grid_8">
-		<!-- Blog Post -->
-		<div class="post">
-			<!-- Post Title -->
-			<h3 class="title"><a href="single.php">Loreum ipsium massa cras phasellus</a></h3>
-			<!-- Post Data -->
-			<p class="sub"><a href="#">News</a>, <a href="#">Products</a> &bull; 31st Sep, 09 &bull; <a href="#">1 Comment</a></p>
-			<div class="hr dotted clearfix">&nbsp;</div>
-			<!-- Post Image -->
-			<img class="thumb" alt="" src="<?php bloginfo('template_url'); ?>/images/610x150.gif" />
-			<!-- Post Content -->
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <b>Mauris vel porta erat.</b> Quisque sit amet risus at odio pellentesque sollicitudin. Proin suscipit molestie facilisis. Aenean vel massa magna. Proin nec lacinia augue. Mauris venenatis libero nec odio viverra consequat. In hac habitasse platea dictumst.</p>
-			<p>Cras vestibulum lorem et dui mollis sed posuere leo semper. Integer ac ultrices neque. Cras lacinia orci a augue tempor egestas. Sed cursus, sem ut vehicula vehicula, ipsum est mattis justo, at volutpat nibh arcu sit amet risus. Vestibulum tincidunt, eros ut commodo laoreet, arcu eros ultrices nibh, ac auctor est dui vel nibh.</p>
-			<!-- Read More Button -->
-			<p class="clearfix"><a href="single.php" class="button right"> Read More...</a></p>
+<?php get_header(); ?>
+<body>
+
+	<h3>index.php</h3>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class="text-right">心情夜雪</h1>
+			</div>
 		</div>
-		<div class="hr clearfix">&nbsp;</div>
-		<!-- Blog Post -->
-		<div class="post">
-			<!-- Post Title -->
-			<h3 class="title"><a href="single.php">Loreum ipsium massa cras phasellus</a></h3>
-			<!-- Post Data -->
-			<p class="sub"><a href="#">News</a>, <a href="#">Products</a> &bull; 31st Sep, 09 &bull; <a href="#">1 Comment</a></p>
-			<div class="hr dotted clearfix">&nbsp;</div>
-			<!-- Post Image -->
-			<img class="thumb" alt="" src="<?php bloginfo('template_url'); ?>/images/610x150.gif" />
-			<!-- Post Content -->
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <b>Mauris vel porta erat.</b> Quisque sit amet risus at odio pellentesque sollicitudin. Proin suscipit molestie facilisis. Aenean vel massa magna. Proin nec lacinia augue. Mauris venenatis libero nec odio viverra consequat. In hac habitasse platea dictumst.</p>
-			<p>Cras vestibulum lorem et dui mollis sed posuere leo semper. Integer ac ultrices neque. Cras lacinia orci a augue tempor egestas. Sed cursus, sem ut vehicula vehicula, ipsum est mattis justo, at volutpat nibh arcu sit amet risus. Vestibulum tincidunt, eros ut commodo laoreet, arcu eros ultrices nibh, ac auctor est dui vel nibh.</p>
-			<!-- Read More Button -->
-			<p class="clearfix"><a href="single.php" class="button right"> Read More...</a></p>
+		<div class="row">
+			<div class="col-md-1">
+
+			</div>
+			<!--文章列表部分-->
+			<div class="col-md-8">
+				<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+				<div class="panel panel-default  post">
+					<div class="panel-body">
+					<!-- Post Title -->
+						<h3 class="title"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h3>
+						<!-- Post Data -->
+						<p class="sub"><?php the_tags('标签：', ', ', ''); ?> &bull; <?php the_time('Y年n月j日') ?> &bull; <?php comments_popup_link('0 条评论', '1 条评论', '% 条评论', '', '评论已关闭'); ?><?php edit_post_link('编辑', ' &bull; ', ''); ?></p>
+						<div class="hr dotted clearfix">&nbsp;</div>
+						<!-- Post Image -->
+						<img class="thumb" alt="" src="<?php bloginfo('template_url'); ?>/images/610x150.gif" />
+						<!-- Post Content -->
+						<?php the_excerpt(); ?>
+						<!-- Read More Button -->
+						<p class="clearfix"><a href="<?php the_permalink(); ?>" class="button right">阅读全文</a></p>
+					</div>
+					<div class="hr clearfix">&nbsp;</div>
+				</div>
+				<?php endwhile; ?>
+
+				<!-- Blog Navigation -->
+				<p class="clearfix"><?php previous_posts_link('&lt;&lt; 查看新文章', 0); ?> <span class="float right"><?php next_posts_link(' 查看旧文章 &gt;&gt;', 0); ?></span></p>
+				<?php else : ?>
+				<div class="panel panel-default  post">
+					<div class="panel-body">
+						<h3 class="text-center">没有找到任何文章！</h3>
+					</div>
+				</div>
+				<?php endif; ?>
+			</div>
+			
+			<div class="col-md-3">
+				
+				<div>
+					<div class="panel-group" id="accordion">
+					  <div class="panel panel-default">
+						<div class="panel-heading">
+						  <h4 class="panel-title">
+							<a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+							  ......该写些什么东西?
+							</a>
+						  </h4>
+						</div>
+						<div id="collapseOne" class="panel-collapse collapse in">
+						  <div class="panel-body">
+							图片，状态
+						  </div>
+						</div>
+					  </div>
+					</div>
+					
+				<?php get_sidebar(); ?>
+				</div>
+			</div>
 		</div>
-		<div class="hr clearfix">&nbsp;</div>
-		<!-- Blog Post -->
-		<div class="post">
-			<!-- Post Title -->
-			<h3 class="title"><a href="single.php">Loreum ipsium massa cras phasellus</a></h3>
-			<!-- Post Data -->
-			<p class="sub"><a href="#">News</a>, <a href="#">Products</a> &bull; 31st Sep, 09 &bull; <a href="#">1 Comment</a></p>
-			<div class="hr dotted clearfix">&nbsp;</div>
-			<!-- Post Image -->
-			<img class="thumb" alt="" src="<?php bloginfo('template_url'); ?>/images/610x150.gif" />
-			<!-- Post Content -->
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <b>Mauris vel porta erat.</b> Quisque sit amet risus at odio pellentesque sollicitudin. Proin suscipit molestie facilisis. Aenean vel massa magna. Proin nec lacinia augue. Mauris venenatis libero nec odio viverra consequat. In hac habitasse platea dictumst.</p>
-			<p>Cras vestibulum lorem et dui mollis sed posuere leo semper. Integer ac ultrices neque. Cras lacinia orci a augue tempor egestas. Sed cursus, sem ut vehicula vehicula, ipsum est mattis justo, at volutpat nibh arcu sit amet risus. Vestibulum tincidunt, eros ut commodo laoreet, arcu eros ultrices nibh, ac auctor est dui vel nibh.</p>
-			<!-- Read More Button -->
-			<p class="clearfix"><a href="single.php" class="button right"> Read More...</a></p>
-		</div>
-		<div class="hr clearfix">&nbsp;</div>
-		<!-- Blog Navigation -->
-		<p class="clearfix"> <a href="#" class="button float">&lt;&lt; Previous Posts</a> <a href="#" class="button float right">Newer Posts >></a> </p>
-	</div>
-	<!-- Column 2 / Sidebar -->
-	<div class="grid_4">
-		<h4>Catagories</h4>
-		<ul class="sidebar">
-			<li><a href="">So who are we?</a></li>
-			<li><a href="">Philosophy</a></li>
-			<li><a href="">History</a></li>
-			<li><a href="">Jobs</a></li>
-			<li><a href="">Staff</a></li>
-			<li><a href="">Clients</a></li>
-		</ul>
-		<h4>Archives</h4>
-		<ul class="sidebar">
-			<li><a href="">January 2010</a></li>
-			<li><a href="">December 2009</a></li>
-			<li><a href="">Novemeber 2009</a></li>
-			<li><a href="">October 2009</a></li>
-			<li><a href="">September 2009</a></li>
-			<li><a href="">August 2009</a></li>
-		</ul>
-	</div>
-	<div class="hr grid_12 clearfix">&nbsp;</div>
-	<!-- Footer -->
-	<p class="grid_12 footer clearfix"> <span class="float"><strong>Design By</strong> QwibbleDesigns&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Code By</strong> <a href="http://www.ludou.org/">Ludou</a></span> <a class="float right" href="#">top</a> </p>
-</div>
-<!--end wrapper-->
+	</div>   
 </body>
-</html>

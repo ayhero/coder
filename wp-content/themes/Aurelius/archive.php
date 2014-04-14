@@ -1,96 +1,147 @@
-<?php get_header();?>
-	<!-- Column 1 /Content -->
-	<div class="grid_8">
-		<div class="sorting">
-			<div class="sort_by">
-				<h4>排序</h4>
-				<ul>
-					<li><a href="#">随机查看</a></li>
-					<li><a href="#">评论最多</a></li>
-					<li><a href="#">标题排序</a></li>
-				</ul>
+<?php get_header(); ?>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7">
+				<h4>浏览<?php
+				// If this is a category archive
+				if (is_category()) {
+					printf('分类</h4>
+				<h2>'.single_cat_title('', false).'</h2>' );
+					if (category_description()) echo '<p>'.category_description().'</p>';
+				// If this is a tag archive
+				} elseif (is_tag()) {
+					printf('标签</h4>
+				<h2>'.single_tag_title('', false).'</h2>' );
+					if (tag_description()) echo '<p>'.tag_description().'</p>';
+				// If this is a daily archive
+				} elseif (is_day()) {
+					printf('日期存档</h4>
+				<h2>'.get_the_time('Y年n月j日').'</h2>' );
+				// If this is a monthly archive
+				} elseif (is_month()) {
+					printf('月份存档</h4>
+					<h2>'.get_the_time('Y年n月').'</h2>' );
+				// If this is a yearly archive
+				} elseif (is_year()) {
+					printf('年份存档</h4>
+					<h2>'.get_the_time('Y年').'</h2>' );
+					// If this is an author archive
+				} elseif (is_author()) {
+						echo '作者存档';
+				// If this is a paged archive
+				} elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {
+					echo '博客存档';
+				}
+				?>
+
 			</div>
-			<h4>浏览分类</h4>
-			<h2>WordPress</h2>
-			<p></p>
-			<p>使用 WordPress 可以搭建功能强大的网络信息发布平台，但更多的是应用于个性化的博客。针对博客的应用，WordPress 能让您省却对后台技术的担心，集中精力做好网站的内容。这里是露兜博客精心整理的 WordPress 相关内容，兴许会给您带来不小的帮助，希望您能喜欢。</p>
+			<div class="col-md-4">
+				<div class="sort_by">
+					<h3>排序</h3>
+					<div class="btn-group">
+					  <div class="btn-group">
+						<a <?php if ( isset($_GET['order']) && ($_GET['order']=='rand') ) echo 'class="current"'; ?> href="<?php echo curPageURL() . '?' . http_build_query(array_merge($_GET, array('order' => 'rand'))); ?>">随机阅读</a>
+						<a <?php if ( isset($_GET['order']) && ($_GET['order']=='commented') ) echo 'class="current"'; ?> href="<?php echo curPageURL() . '?' . http_build_query(array_merge($_GET, array('order' => 'commented'))); ?>">评论最多</a>
+						<a <?php if ( isset($_GET['order']) && ($_GET['order']=='alpha') ) echo 'class="current"'; ?> href="<?php echo curPageURL() . '?' . http_build_query(array_merge($_GET, array('order' => 'alpha'))); ?>">标题排序</a>
+					  </div>
+					</div>
+					
+					
+				</div>
+			</div>
+			
+			<div class="col-md-1">
+			
+			</div>
+				
+			
 		</div>
-		<!-- Blog Post -->
-		<div class="post">
-			<!-- Post Title -->
-			<h3 class="title"><a href="single.php">Loreum ipsium massa cras phasellus</a></h3>
-			<!-- Post Data -->
-			<p class="sub"><a href="#">News</a>, <a href="#">Products</a> &bull; 31st Sep, 09 &bull; <a href="#">1 Comment</a></p>
-			<div class="hr dotted clearfix">&nbsp;</div>
-			<!-- Post Image -->
-			<img class="thumb" alt="" src="<?php bloginfo('template_url'); ?>/images/610x150.gif" />
-			<!-- Post Content -->
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <b>Mauris vel porta erat.</b> Quisque sit amet risus at odio pellentesque sollicitudin. Proin suscipit molestie facilisis. Aenean vel massa magna. Proin nec lacinia augue. Mauris venenatis libero nec odio viverra consequat. In hac habitasse platea dictumst.</p>
-			<p>Cras vestibulum lorem et dui mollis sed posuere leo semper. Integer ac ultrices neque. Cras lacinia orci a augue tempor egestas. Sed cursus, sem ut vehicula vehicula, ipsum est mattis justo, at volutpat nibh arcu sit amet risus. Vestibulum tincidunt, eros ut commodo laoreet, arcu eros ultrices nibh, ac auctor est dui vel nibh.</p>
-			<!-- Read More Button -->
-			<p class="clearfix"><a href="single.php" class="button right"> Read More...</a></p>
-		</div>
-		<div class="hr clearfix">&nbsp;</div>
-		<!-- Blog Post -->
-		<div class="post">
-			<!-- Post Title -->
-			<h3 class="title"><a href="single.php">Loreum ipsium massa cras phasellus</a></h3>
-			<!-- Post Data -->
-			<p class="sub"><a href="#">News</a>, <a href="#">Products</a> &bull; 31st Sep, 09 &bull; <a href="#">1 Comment</a></p>
-			<div class="hr dotted clearfix">&nbsp;</div>
-			<!-- Post Image -->
-			<img class="thumb" alt="" src="<?php bloginfo('template_url'); ?>/images/610x150.gif" />
-			<!-- Post Content -->
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <b>Mauris vel porta erat.</b> Quisque sit amet risus at odio pellentesque sollicitudin. Proin suscipit molestie facilisis. Aenean vel massa magna. Proin nec lacinia augue. Mauris venenatis libero nec odio viverra consequat. In hac habitasse platea dictumst.</p>
-			<p>Cras vestibulum lorem et dui mollis sed posuere leo semper. Integer ac ultrices neque. Cras lacinia orci a augue tempor egestas. Sed cursus, sem ut vehicula vehicula, ipsum est mattis justo, at volutpat nibh arcu sit amet risus. Vestibulum tincidunt, eros ut commodo laoreet, arcu eros ultrices nibh, ac auctor est dui vel nibh.</p>
-			<!-- Read More Button -->
-			<p class="clearfix"><a href="single.php" class="button right"> Read More...</a></p>
-		</div>
-		<div class="hr clearfix">&nbsp;</div>
-		<!-- Blog Post -->
-		<div class="post">
-			<!-- Post Title -->
-			<h3 class="title"><a href="single.php">Loreum ipsium massa cras phasellus</a></h3>
-			<!-- Post Data -->
-			<p class="sub"><a href="#">News</a>, <a href="#">Products</a> &bull; 31st Sep, 09 &bull; <a href="#">1 Comment</a></p>
-			<div class="hr dotted clearfix">&nbsp;</div>
-			<!-- Post Image -->
-			<img class="thumb" alt="" src="<?php bloginfo('template_url'); ?>/images/610x150.gif" />
-			<!-- Post Content -->
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <b>Mauris vel porta erat.</b> Quisque sit amet risus at odio pellentesque sollicitudin. Proin suscipit molestie facilisis. Aenean vel massa magna. Proin nec lacinia augue. Mauris venenatis libero nec odio viverra consequat. In hac habitasse platea dictumst.</p>
-			<p>Cras vestibulum lorem et dui mollis sed posuere leo semper. Integer ac ultrices neque. Cras lacinia orci a augue tempor egestas. Sed cursus, sem ut vehicula vehicula, ipsum est mattis justo, at volutpat nibh arcu sit amet risus. Vestibulum tincidunt, eros ut commodo laoreet, arcu eros ultrices nibh, ac auctor est dui vel nibh.</p>
-			<!-- Read More Button -->
-			<p class="clearfix"><a href="single.php" class="button right"> Read More...</a></p>
-		</div>
-		<div class="hr clearfix">&nbsp;</div>
-		<!-- Blog Navigation -->
-		<p class="clearfix"> <a href="#" class="button float">&lt;&lt; Previous Posts</a> <a href="#" class="button float right">Newer Posts >></a> </p>
 	</div>
-	<!-- Column 2 / Sidebar -->
-	<div class="grid_4">
-		<h4>Catagories</h4>
-		<ul class="sidebar">
-			<li><a href="">So who are we?</a></li>
-			<li><a href="">Philosophy</a></li>
-			<li><a href="">History</a></li>
-			<li><a href="">Jobs</a></li>
-			<li><a href="">Staff</a></li>
-			<li><a href="">Clients</a></li>
-		</ul>
-		<h4>Archives</h4>
-		<ul class="sidebar">
-			<li><a href="">January 2010</a></li>
-			<li><a href="">December 2009</a></li>
-			<li><a href="">Novemeber 2009</a></li>
-			<li><a href="">October 2009</a></li>
-			<li><a href="">September 2009</a></li>
-			<li><a href="">August 2009</a></li>
-		</ul>
+	<!-- Column 1 /Content -->
+	
+<?php
+global $wp_query;
+
+if ( isset($_GET['order']) && ($_GET['order']=='rand') ) 
+{
+	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+	$args=array(
+		'orderby' => 'rand',
+		'paged' => $paged,
+	);
+	$arms = array_merge(
+		$args,
+		$wp_query->query
+	);
+	query_posts($arms);
+}
+else if ( isset($_GET['order']) && ($_GET['order']=='commented') )
+{
+	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+	$args=array(
+		'orderby' => 'comment_count',
+		'order' => 'DESC',
+		'paged' => $paged,
+	);
+    $arms = array_merge(
+		$args,
+		$wp_query->query
+	);
+    query_posts($arms);
+}
+else if ( isset($_GET['order']) && ($_GET['order']=='alpha') )
+{
+	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+	$args=array(
+		'orderby' => 'title',
+		'order' => 'ASC',
+		'paged' => $paged,
+	);
+    $arms = array_merge(
+		$args,
+		$wp_query->query
+	);
+    query_posts($arms);
+} 
+?>
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-8">
+			
+			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+			<div class="panel panel-default  post">
+				<div class="panel-body">
+				<!-- Post Title -->
+					<h3 class="title"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h3>
+					<!-- Post Data -->
+					<p class="sub"><?php the_tags('标签：', ', ', ''); ?> &bull; <?php the_time('Y年n月j日') ?> &bull; <?php comments_popup_link('0 条评论', '1 条评论', '% 条评论', '', '评论已关闭'); ?><?php edit_post_link('编辑', ' &bull; ', ''); ?></p>
+					<div class="hr dotted clearfix">&nbsp;</div>
+					<!-- Post Image -->
+					<img class="thumb" alt="" src="<?php bloginfo('template_url'); ?>/images/610x150.gif" />
+					<!-- Post Content -->
+					<?php the_excerpt(); ?>
+					<!-- Read More Button -->
+					<p class="clearfix"><a href="<?php the_permalink(); ?>" class="button right">阅读全文</a></p>
+				</div>
+				<div class="hr clearfix">&nbsp;</div>
+			</div>
+			<?php endwhile; ?>
+
+			<!-- Blog Navigation -->
+			<p class="clearfix"><?php previous_posts_link('&lt;&lt; 查看新文章', 0); ?> <span class="float right"><?php next_posts_link(' 查看旧文章 &gt;&gt;', 0); ?></span></p>
+			<?php else : ?>
+			<div class="panel panel-default  post">
+				<div class="panel-body">
+					<h3 class="text-center">没有找到任何文章！</h3>
+				</div>
+			</div>
+			<?php endif; ?>
+			</div>
+			
+			<div class="col-md-3">
+				<?php get_sidebar(); ?>
+			</div>
+			
 	</div>
-	<div class="hr grid_12 clearfix">&nbsp;</div>
-	<!-- Footer -->
-	<p class="grid_12 footer clearfix"> <span class="float"><strong>Design By</strong> QwibbleDesigns&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Code By</strong> <a href="http://www.ludou.org/">Ludou</a></span> <a class="float right" href="#">top</a> </p>
-</div>
-<!--end wrapper-->
-</body>
-</html>
+	
+<?php get_footer(); ?>
